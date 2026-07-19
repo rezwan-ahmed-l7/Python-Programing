@@ -20,6 +20,7 @@ d = 5
 
 c **= d  # c = c ** d
 print ("c to the power of d: ", c)
+print ( )
 
 # Logical Operators
 
@@ -29,6 +30,7 @@ f = 5
 print (not (e > f))
 print (e > f and e < 15)
 print (e > f or e < 15)
+print ( )
 
 value1 = True
 value2 = False
