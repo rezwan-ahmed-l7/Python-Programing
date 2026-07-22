@@ -61,8 +61,8 @@ As I continue learning, this repository will grow with new concepts, exercises, 
 
 Data Structures & Algorithms implemented using Python
 
-**DSA:** [DSA-2](https://github.com/rezwan-ahmed-l7/DSA-2)
-**Numerical:** [Numerical-Methods](https://github.com/rezwan-ahmed-l7/Numerical-Methods)
+- **DSA:** [DSA-2](https://github.com/rezwan-ahmed-l7/DSA-2)
+- **Numerical:** [Numerical-Methods](https://github.com/rezwan-ahmed-l7/Numerical-Methods)
 
 ---
 
