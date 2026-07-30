@@ -18,9 +18,9 @@ A personal repository documenting my Python programming journey throughout my B.
 
 # About The Repository
 
-This repository documents my Python learning journey through hands-on coding, practice exercises, notes, and small programs.
+This repository documents my Python learning journey through hands-on coding, practice exercises, notes, and small projects.
 
-Its primary goal is to build a strong foundation in Python programming while improving logical thinking, programming skills, and code organization.
+Its primary goal is to build a strong foundation in Python programming while improving logical thinking, programming skills, code organization, and practical software development skills.
 
 As I continue learning, this repository will grow with new concepts, exercises, and practical implementations.
 
@@ -33,13 +33,15 @@ As I continue learning, this repository will grow with new concepts, exercises, 
 - Improve logical thinking and programming skills
 - Learn Python's standard library and commonly used modules
 - Develop practical programming experience through exercises and small projects
+- Understand how Python concepts are applied in real programs
 - Prepare for advanced Python topics and software development
 
 ---
 
 # Topics Covered
 
-- Python Fundamentals
+### Python Fundamentals
+
 - Variables & Data Types
 - Input & Output
 - Operators
@@ -47,20 +49,91 @@ As I continue learning, this repository will grow with new concepts, exercises, 
 - Loops
 - Functions
 - Strings
-- Lists
-- Tuples
-- Dictionaries
-- Sets
+- Lists, Tuples, Dictionaries & Sets
+
+### File & Error Handling
+
 - File Handling
-- Modules & Packages
 - Exception Handling
+
+### Object-Oriented Programming
+
+- Classes & Objects
+- Constructors
+- Encapsulation
+- Abstraction
+- Inheritance
+- Polymorphism
+- Method Overriding
+- Composition
+- Dunder Methods
+- Static & Class Methods
+- Getter & Setter Methods
+
+### Modules & Packages
+
+- Modules
+- Packages
+- `__init__.py`
+
+---
+
+# Projects
+
+This repository also contains practical projects developed while applying the concepts learned throughout the Python journey.
+
+# Bank Management System
+
+A console-based Bank Management System developed using Python OOP.
+
+**Key concepts demonstrated:**
+
+- Object-Oriented Programming
+- Classes & Objects
+- Inheritance
+- Method Overriding
+- Polymorphism
+- Protected-style Attributes
+- `super()`
+- Modules & Packages
+- Multi-file Project Structure
+
+**Project:** [Bank Management System](./Bank%20Management%20System/)
+
+---
+
+# Repository Structure
+
+```text
+Python Programming/
+│
+├── Python Codes/
+│   └── Python fundamentals & practice
+│
+├── Python OOP/
+│   └── Object-Oriented Programming practice
+│
+├── Bank Management System/
+│   ├── main.py
+│   ├── README.md
+│   ├── .gitignore
+│   └── bank/
+│       ├── __init__.py
+│       ├── account.py
+│       ├── savings.py
+│       └── show.py
+│
+└── README.md
+```
+
+The repository is organized to separate fundamental practice, OOP learning, and practical projects.
 
 ---
 
 # Python Related Repositories
 
-- **DSA :**  [DSA-2](https://github.com/rezwan-ahmed-l7/DSA-2)
-- **Numerical :**  [Numerical-Methods](https://github.com/rezwan-ahmed-l7/Numerical-Methods)
+- **DSA:** [DSA-2](https://github.com/rezwan-ahmed-l7/DSA-2)
+- **Numerical Methods:** [Numerical-Methods](https://github.com/rezwan-ahmed-l7/Numerical-Methods)
 
 ---
 
@@ -76,26 +149,31 @@ As I continue learning, this repository will grow with new concepts, exercises, 
 
 # Learning Outcomes
 
-Throughout this repository I continue improving my understanding of:
+Through this repository I continue improving my understanding of:
 
 - Python programming fundamentals
+- Object-Oriented Programming
 - Code organization and readability
 - Logical thinking and problem-solving
 - Modular programming
+- Reusable Python code
 - Debugging techniques
-- Writing reusable Python code
+- Building small practical applications
 
 ---
 
 # Future Learning
 
-- Object-Oriented Programming in Python
 - Python Standard Library
+- Advanced Python
+- DSA with Python
 - NumPy
 - Pandas
 - Matplotlib
 - GUI Development
 - Automation & Scripting
+- Database Integration
+- Backend Development
 
 ---
 
@@ -109,6 +187,6 @@ B.Sc. Engg. in CSE Student | Aspiring Software Engineer
 
 # Support
 
-🌱 This repository documents my continuous Python learning journey. The code and notes are shared for educational purposes and may be helpful for anyone learning Python programming and strengthening their programming fundamentals.
+🌱 This repository documents my continuous Python learning journey. The code, notes, and projects are shared for educational purposes and may be helpful for anyone learning Python programming and strengthening their programming fundamentals.
 
 If you found this repository useful, consider giving it a ⭐ on GitHub. Thank you.
