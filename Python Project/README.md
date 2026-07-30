@@ -1,7 +1,7 @@
 # Bank Management System
 
 <p align="center">
-  A console-based Bank Management System developed to practice Python Object-Oriented Programming, modular project structure, inheritance, method overriding, and polymorphism.
+  A console-based Bank Management System developed to practice Python Object-Oriented Programming, inheritance, method overriding, polymorphism, modules, packages, and separation of responsibilities.
 </p>
 
 ---
@@ -10,11 +10,11 @@
 
 This project is a small console-based Bank Management System developed as a practical implementation of Python OOP concepts.
 
-The application allows a user to create a savings account, add money, withdraw money, calculate interest, and display updated account information.
+The application allows a user to create a savings account, add money, withdraw money, calculate interest, and view the final account summary.
 
-Instead of keeping the entire program in a single file, the project is divided into multiple modules and organized inside a Python package.
+The project is organized into multiple Python modules inside a package instead of keeping the complete application in a single file.
 
-The main purpose of the project is to demonstrate how OOP concepts can work together in a structured, multi-file application.
+The main purpose is to demonstrate how **OOP concepts, modular programming, and basic software structure** can work together in a practical application.
 
 ---
 
@@ -22,65 +22,73 @@ The main purpose of the project is to demonstrate how OOP concepts can work toge
 
 - Create a Savings Account
 - Take account information through user input
+- Display current balance
 - Add money to the account
 - Withdraw money from the account
 - Prevent withdrawal when the balance is insufficient
-- Calculate savings interest
-- Display account information
+- Calculate interest based on the current balance
+- Calculate total balance including interest
+- Display a final account summary
 - Use inheritance between account classes
+- Use `super()` to initialize the parent class
+- Use a protected-style `_balance` attribute
 - Override parent methods in the child class
+- Use getter method to access the balance
 - Demonstrate polymorphism
-- Organize classes using modules and packages
+- Organize the application using modules and packages
 
 ---
 
 # Project Architecture
 
+The application separates **input/control, business logic, and display responsibilities**.
+
 ```text
                          main.py
                             │
-                            │
-                    User Input / Object
+                     Input + Control
                             │
                             ↓
                     SavingsAccount
                             │
-                       inherits
+                     inherits from
                             ↓
                          Account
                             │
-              ┌─────────────┼─────────────┐
-              ↓             ↓             ↓
-         add_money()  withdraw_money()   show()
-              │             │             │
-              └─────────────┼─────────────┘
+          ┌─────────────────┼─────────────────┐
+          ↓                 ↓                 ↓
+     add_money()      withdraw_money()   get_balance()
+          │                 │                 │
+          └─────────────────┼─────────────────┘
                             │
                             ↓
                     SavingsAccount
                             │
               ┌─────────────┼─────────────┐
               ↓             ↓             ↓
-          interest      show() override   account operations
-                            │
+        Interest       Total Balance   Overridden
+       Calculation      Calculation     Methods
+              │             │             │
+              └─────────────┼─────────────┘
                             ↓
                        AccountShow
                             │
                             ↓
-                     account.show()
+                       Display Only
                             │
                             ↓
-                       Polymorphism
+                          Output
 ```
 
 ### Component Responsibilities
 
-| Component        | Responsibility                                               |
-| ---------------- | ------------------------------------------------------------ |
-| `main.py`        | Takes user input, creates objects, and controls program flow |
-| `Account`        | Provides common account properties and operations            |
-| `SavingsAccount` | Extends `Account` with savings-specific behavior             |
-| `AccountShow`    | Handles displaying account information                       |
-| `bank`           | Package containing the related modules                       |
+| Component        | Responsibility                                                                 |
+| ---------------- | ------------------------------------------------------------------------------ |
+| `main.py`        | Takes user input, creates objects, and controls program flow                   |
+| `Account`        | Provides common account data and basic account operations                      |
+| `SavingsAccount` | Extends `Account` with savings-specific calculations and overridden operations |
+| `AccountShow`    | Displays current and final account information                                 |
+| `bank`           | Package containing the application's modules                                   |
 
 ---
 
@@ -88,7 +96,7 @@ The main purpose of the project is to demonstrate how OOP concepts can work toge
 
 ## Account — Parent Class
 
-`Account` contains the common properties and operations shared by account types.
+`Account` contains the common properties and operations that can be shared by different account types.
 
 ```python
 class Account:
@@ -106,24 +114,23 @@ class Account:
         else:
             print("Insufficient Balance")
 
-    def show(self):
-        print("Name:", self.name)
-        print("Balance:", self._balance)
+    def get_balance(self):
+        return self._balance
 ```
 
-The class is responsible for:
+### Responsibilities
 
-- Account holder name
-- Account balance
-- Adding money
-- Withdrawing money
-- Basic account information
+- Store account holder name
+- Store account balance
+- Add money
+- Withdraw money
+- Provide balance through a getter method
 
 ---
 
-## SavingsAccount — Child Class
+# SavingsAccount — Child Class
 
-`SavingsAccount` inherits from `Account` and adds savings-specific functionality.
+`SavingsAccount` inherits from `Account` and adds savings-specific behavior.
 
 ```python
 class SavingsAccount(Account):
@@ -133,12 +140,13 @@ class SavingsAccount(Account):
         self.interest = interest
 ```
 
-It extends the parent class with:
+The class adds:
 
 - Interest rate
 - Interest calculation
-- Savings-specific display
-- Overridden account operations
+- Total balance calculation
+- Overridden `add_money()`
+- Overridden `withdraw_money()`
 
 ---
 
@@ -154,21 +162,34 @@ Account
 SavingsAccount
 ```
 
-`SavingsAccount` reuses common functionality from `Account` instead of rewriting the same code.
+`SavingsAccount` reuses the common functionality of `Account` instead of implementing everything again.
 
-The child class also uses:
+The child class uses:
 
 ```python
 super().__init__(name, balance)
 ```
 
-to initialize the parent class.
+to call the constructor of the parent class.
+
+This allows `Account` to initialize:
+
+```text
+name
+_balance
+```
+
+while `SavingsAccount` initializes:
+
+```text
+interest
+```
 
 ---
 
-# Protected Attribute
+# Protected-Style Attribute
 
-The account balance is stored using:
+The account balance is stored as:
 
 ```python
 self._balance
@@ -176,44 +197,145 @@ self._balance
 
 The leading underscore follows Python's protected-style naming convention.
 
-It indicates that `_balance` is intended for internal use and can also be accessed by subclasses such as `SavingsAccount`.
+It indicates that `_balance` is intended for internal use and can also be accessed by subclasses.
+
+The balance is exposed through a getter:
+
+```python
+def get_balance(self):
+    return self._balance
+```
+
+This avoids directly accessing `_balance` from the main application when retrieving the current balance.
 
 ---
 
-# Method Overriding & Polymorphism
+# Method Overriding
 
-The parent class defines:
+`SavingsAccount` overrides the `add_money()` and `withdraw_money()` methods inherited from `Account`.
 
-```python
-def show(self):
-```
-
-The child class provides its own implementation of the same method:
+### Parent
 
 ```python
-def show(self):
+def add_money(self, amount):
+    self._balance += amount
 ```
 
-Therefore, the same method call:
+### Child
 
 ```python
-account.show()
+def add_money(self, amount):
+    self._balance += amount
 ```
 
-can execute the appropriate implementation based on the actual object.
+The child class provides its own implementation of the inherited methods.
 
-The display helper demonstrates this behavior:
+The same approach is used for:
+
+```python
+withdraw_money()
+```
+
+This demonstrates **method overriding**.
+
+---
+
+# Interest Calculation
+
+The savings-specific interest calculation is implemented inside `SavingsAccount`.
+
+```python
+def calculate_interest(self):
+    return self._balance * self.interest / 100
+```
+
+For example:
+
+```text
+Current Balance = 9000
+Interest Rate   = 5%
+
+Interest = 9000 × 5 / 100
+         = 450
+```
+
+The final balance including interest is calculated using:
+
+```python
+def calculate_total_balance(self):
+    return self._balance + self.calculate_interest()
+```
+
+Therefore:
+
+```text
+Current Balance = 9000
+Interest        = 450
+
+Total Balance   = 9450
+```
+
+All savings-related calculations remain inside `SavingsAccount`.
+
+---
+
+# Polymorphism
+
+The project demonstrates polymorphism through overridden methods.
+
+`SavingsAccount` is treated as an `Account`, while providing its own implementations of inherited methods such as:
+
+```python
+add_money()
+withdraw_money()
+```
+
+The same method interface can therefore behave according to the implementation provided by the actual object.
+
+For example:
+
+```python
+account.add_money(amount)
+```
+
+can use the implementation defined by `SavingsAccount`.
+
+This demonstrates how a child class can provide specialized behavior while maintaining the interface inherited from its parent.
+
+---
+
+# Display Responsibility
+
+The `AccountShow` class is responsible only for displaying information.
 
 ```python
 class AccountShow:
 
-    def show_account(self, account):
-        account.show()
+    def show_current(self, account):
+        print("Current Balance:", account.get_balance())
+
+    def show_final(self, account):
+        print("----- Final Account Summary -----")
+        print("Name:", account.name)
+        print("Current Balance:", account.get_balance())
+        print("Interest Rate:", account.interest, "%")
+        print("Interest Amount:", account.calculate_interest())
+        print("Total Balance with Interest:", account.calculate_total_balance())
 ```
 
-The `AccountShow` class does not need to know the specific account implementation. It simply calls the common `show()` interface.
+The important design decision is:
 
-This provides a simple demonstration of **polymorphic behavior**.
+```text
+SavingsAccount
+      ↓
+Calculates
+
+AccountShow
+      ↓
+Displays
+```
+
+`AccountShow` does not perform the calculations itself. It calls methods from `SavingsAccount` and displays their results.
 
 ---
 
@@ -232,11 +354,11 @@ bank/
 
 ### `account.py`
 
-Contains the parent `Account` class.
+Contains the parent `Account` class and common account operations.
 
 ### `savings.py`
 
-Contains the child `SavingsAccount` class.
+Contains the child `SavingsAccount` class, including savings-specific calculations and overridden methods.
 
 ### `show.py`
 
@@ -252,58 +374,69 @@ from .savings import SavingsAccount
 from .show import AccountShow
 ```
 
-This allows `main.py` to import the required classes directly from the package.
+This allows `main.py` to import the required classes directly from the package:
+
+```python
+from bank import SavingsAccount, AccountShow
+```
 
 ---
 
 # Project Structure
 
 ```text
-Bank Management System/
+Python Project/
 │
-├── main.py
 ├── README.md
-├── .gitignore
 │
-└── bank/
-    ├── __init__.py
-    ├── account.py
-    ├── savings.py
-    └── show.py
+└── Bank System/
+    │
+    ├── main.py
+    │
+    └── bank/
+        ├── __init__.py
+        ├── account.py
+        ├── savings.py
+        └── show.py
 ```
 
 ---
 
 # Program Flow
 
+The application follows this sequence:
+
 ```text
 User
  │
- │ enters account information
+ │ enters name, balance, interest rate
  ↓
 main.py
  │
  │ creates SavingsAccount object
  ↓
-SavingsAccount
- │
- │ inherits common functionality
- ↓
-Account
- │
- ├── Add Money
- ├── Withdraw Money
- └── Account Data
+Initial Current Balance
  │
  ↓
-AccountShow
- │
- │ calls show()
- ↓
-SavingsAccount.show()
+Add Money
  │
  ↓
-Updated Account Information
+Updated Current Balance
+ │
+ ↓
+Withdraw Money
+ │
+ ↓
+Updated Current Balance
+ │
+ ↓
+Final Account Summary
+ │
+ ├── Name
+ ├── Current Balance
+ ├── Interest Rate
+ ├── Interest Amount
+ └── Total Balance with Interest
 ```
 
 ---
@@ -313,9 +446,9 @@ Updated Account Information
 ### Input
 
 ```text
-Enter Name: Rezwan
-Enter Balance: 10000
-Enter Interest: 5
+Enter Name: Paris
+Enter Initial Balance: 10000
+Enter Interest Rate: 5
 
 Enter amount to add: 2000
 
@@ -325,19 +458,18 @@ Enter amount to withdraw: 3000
 ### Output
 
 ```text
-Savings Account
-Name: Rezwan
-Balance: 10000.0
-Interest: 5.0
+Current Balance: 10000.0
 
-Money added: 2000.0
+Current Balance: 12000.0
 
-Money withdrawn: 3000.0
+Current Balance: 9000.0
 
-Savings Account
-Name: Rezwan
-Balance: 9000.0
-Interest: 5.0
+----- Final Account Summary -----
+Name: Paris
+Current Balance: 9000.0
+Interest Rate: 5.0 %
+Interest Amount: 450.0
+Total Balance with Interest: 9450.0
 ```
 
 ---
