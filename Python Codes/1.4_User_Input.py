@@ -8,9 +8,9 @@ print ("Data Type of the value: ", type(val))
 print()
 # Proper way to take input
 
-name = input("Enter your name: ")
-age = int(input("Enter your age: "))
-gpa = float(input("Enter your GPA: "))
+name = input("Enter your name: ")           # For String
+age = int(input("Enter your age: "))        # For Integer
+gpa = float(input("Enter your GPA: "))      # For Float
 
 print ("Hello, ", name)
 print ("Age: ", age)
