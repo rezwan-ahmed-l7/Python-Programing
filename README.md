@@ -98,7 +98,7 @@ A console-based Bank Management System developed using Python OOP.
 - Modules & Packages
 - Multi-file Project Structure
 
-**Project:** [Bank Management System](./Bank%20Management%20System/)
+**Project:** [Bank Management System](https://github.com/rezwan-ahmed-l7/Python-Programing/tree/main/Python%20Project)
 
 ---
 
